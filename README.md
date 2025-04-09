@@ -44,8 +44,11 @@ La gestion manuelle des stocks entraîne des erreurs fréquentes, un manque de t
 ![term1](https://github.com/user-attachments/assets/77c0eb52-a566-4b2b-a283-b083c66d3151)
 
 ![term2](https://github.com/user-attachments/assets/32deffaa-d7dd-427a-bd5f-523a9b55c382)
+
 ![term3](https://github.com/user-attachments/assets/0a880126-45e8-4fda-81cd-20c6a3a02b9c)
 
+## 7. Exécution des Filtrages dans la Console 🧪
+![filtrrage](https://github.com/user-attachments/assets/29e8202a-c7ed-49a9-81e4-1470f859a0a9)
 
 ## Version : Système de Gestion des Stocks de Pharmacie
 
