@@ -37,7 +37,8 @@ La gestion manuelle des stocks entraîne des erreurs fréquentes, un manque de t
 
 ## 6. Modèle Conceptuel de la Base 🗺️
 
-![conspution](https://github.com/user-attachments/assets/6b6fb94d-8da2-40cc-9704-8dbdac98c640)
+!![concF](https://github.com/user-attachments/assets/b8717fb3-f475-4af5-82f3-0927af0e194f)
+
 
 
 ## 7. Exécution des Tests dans la Console 🧪
