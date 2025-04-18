@@ -37,7 +37,8 @@ La gestion manuelle des stocks entraîne des erreurs fréquentes, un manque de t
 
 ## 6. Modèle Conceptuel de la Base 🗺️
 
-!![concF](https://github.com/user-attachments/assets/b8717fb3-f475-4af5-82f3-0927af0e194f)
+
+![conff](https://github.com/user-attachments/assets/2b0a746e-d38a-46bb-9ced-f9178420126e)
 
 
 
