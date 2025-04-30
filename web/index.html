@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Statistiques des Médicaments</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      background: #f5f5f5;
+    }
+    #chart-container {
+      width: 800px;
+      max-width: 100%;
+      background: white;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 0.5rem;
+    }
+    .chart-title {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="chart-container">
+    <h1 class="chart-title">Quantité des Médicaments</h1>
+    <canvas id="medicamentChart"></canvas>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const ctx = document.getElementById('medicamentChart').getContext('2d');
+
+      // Données statiques pour tester
+      const staticData = [
+        { nomMedicament: 'Medicament 1', quantiteTotale: 100 },
+        { nomMedicament: 'Medicament 2', quantiteTotale: 50 },
+        { nomMedicament: 'Medicament 3', quantiteTotale: 75 }
+      ];
+
+      const labels = staticData.map(item => item.nomMedicament);
+      const quantites = staticData.map(item => item.quantiteTotale);
+
+      const backgroundColors = [
+        'rgba(255, 99, 132, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(153, 102, 255, 0.7)',
+        'rgba(255, 159, 64, 0.7)'
+      ];
+
+      // Création du graphique avec les données statiques
+      const medicamentChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Quantité Totale',
+            data: quantites,
+            backgroundColor: backgroundColors,
+            borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  return `${context.parsed.y} unité(s)`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: 'Quantité' }
+            },
+            x: {
+              title: { display: true, text: 'Médicaments' }
+            }
+          }
+        }
+      });
+
+      // Appel API pour récupérer les données
+      fetch('http://localhost:8080/projet-stocks-de-pharmacie-main/MedicamentQuantite')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Erreur HTTP! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("Données récupérées:", data);
+
+          if (data && Array.isArray(data)) {
+            const newLabels = data.map(item => item.nomMedicament);
+            const newQuantites = data.map(item => item.quantiteTotale);
+
+            // Mise à jour du graphique avec les nouvelles données
+            medicamentChart.data.labels = newLabels;
+            medicamentChart.data.datasets[0].data = newQuantites;
+            medicamentChart.update(); // Important : on met à jour
+          } else {
+            console.error("Les données reçues ne sont pas un tableau !");
+          }
+        })
+        .catch(err => {
+          console.error('Erreur de chargement des données:', err);
+          const container = document.getElementById('chart-container');
+          container.innerHTML = `
+            <p style="color:red; text-align:center;">
+              Erreur lors du chargement des données de médicaments.<br>
+              ${err.message}
+            </p>`;
+        });
+    });
+  </script>
+
+</body>
+</html>
