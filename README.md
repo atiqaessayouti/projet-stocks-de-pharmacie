@@ -77,4 +77,4 @@ La gestion manuelle des stocks entraîne des erreurs fréquentes, un manque de t
 https://github.com/user-attachments/assets/2ceec749-1122-4e46-acee-677f1942c9c2
 
 
----
+
